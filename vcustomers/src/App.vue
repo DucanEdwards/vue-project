@@ -15,7 +15,10 @@
           <ul class="nav navbar-nav">
             <li><router-link to='/'>主页</router-link></li>
             <li><router-link to='/about'>关于我们</router-link></li>
-            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><router-link to='/add'>添加用户</router-link></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

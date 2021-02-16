@@ -1,6 +1,6 @@
 <template>
   <div class="about container">
-    about
+    <h1 class="page-header">随便练习一下</h1>
   </div>
 </template>
 

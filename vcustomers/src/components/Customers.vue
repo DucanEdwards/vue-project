@@ -1,6 +1,9 @@
 <template>
   <div class="customers container">
-    <h1 class="page-header">用户管理系统</h1>、
+    <Alert v-if="alert" :message="alert"></Alert>
+    <h1 class="page-header">用户管理系统</h1>
+    <input type="text" class="form-control" placeholder="搜索" v-model="filterInput">
+    <br>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -12,11 +15,11 @@
         </thead>
 
         <tbody>
-            <tr v-for="(customer,index) in customers" :key="index">
+            <tr v-for="(customer,index) in filterBy(customers,filterInput)" :key="index">
                 <td>{{customer.name}}</td>
                 <td>{{customer.phone}}</td>
                 <td>{{customer.email}}</td>
-                <td></td>
+                <td><router-link class="btn btn-default" :to="'/customer/'+customer.id">详情</router-link></td>
             </tr>
         </tbody>
     </table>
@@ -24,6 +27,7 @@
 </template>
 
 <script>
+import Alert from './Alert.vue'
 export default {
   name: 'customers',
   props: {
@@ -31,7 +35,9 @@ export default {
   },
   data() {
       return {
-          customers:[]
+          customers:[],
+          alert:'',
+          filterInput:""
       }
   },
   methods: {
@@ -41,11 +47,20 @@ export default {
                     // console.log(response)
                     this.customers=response.body
                 })
+      },
+      filterBy(customer,value) {
+          return this.customers.filter(function(customer){
+              return customer.name.match(value)
+          })
       }
   },
   created() {
+      if (this.$route.query.alert) {
+          this.alert=this.$route.query.alert
+      }
       this.fetchCustomers()
-  }
+  },
+  components:{Alert}
 }
 </script>
 
