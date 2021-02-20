@@ -3,6 +3,7 @@
     <div class="col-sm-12 col-md-8">
       <new-pizza></new-pizza>
     </div>
+
     <div class="col-sm-12 col-md-4">
       <h3 class="text-muted my-5">Menu</h3>
       <table class="table">
@@ -41,7 +42,7 @@ export default {
     getPizzas: {
           //从vuex中获取数据
           get() {
-            return this.$store.state.menuItems
+            return this.$store.getters.getMenuItems
           },
           set() {
 
@@ -82,4 +83,4 @@ export default {
     }
   }
 };
-</script>NewPizza
+</script>

@@ -30,6 +30,10 @@ export default {
             password:'',
         }
     },
+    // 跳转到登录页面清空登录信息
+    beforeRouteEnter(to,from,next) {
+        next(vm=>vm.$store.dispatch('setUser',null))
+    },
     methods:{
         onSubmit() {
             axios.get('/users.json')
@@ -46,9 +50,11 @@ export default {
                     }))
 
                     if (result!=null && result.length>0) {
+                        this.$store.dispatch('setUser',result[0].email)
                         this.$router.push({name:'homeLink'})
                     }
                     else {
+                        this.$store.dispatch('setUser',null)
                         alert('账号或密码错误')
                     }
                 })
